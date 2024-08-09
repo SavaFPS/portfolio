@@ -25,11 +25,13 @@ const config = {
     },
     extend: {
       colors: {
-        primary: '#1c1c22',
+        primary: '#0d1b2a',
+        secundary: '#1b263b',
         accent: {
-          DEFAULT: '#00ff99',
-          hover: '#00e187',
+          DEFAULT: '#778da9',
+          hover: '#415a77',
         },
+        // colors: #0d1b2a , #1b263b , #415a77 , #778da9 , #e0e1dd
       },
       keyframes: {
         'accordion-down': {

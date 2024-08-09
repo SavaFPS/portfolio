@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui/button';
-import { FiDownload } from 'react-icons/fi';
+import React from 'react';
 
 const Home = () => {
   return (
