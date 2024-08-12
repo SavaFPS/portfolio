@@ -21,14 +21,18 @@ const config = {
       xl: '1200px',
     },
     fontFamily: {
-      primary: 'var(--font-jetbrainsMono)',
+      primary: 'var(--font-PoppinsFont)',
     },
     extend: {
+      dropShadow: {
+        custom: '0 0 12px #00f8f8',
+      },
       colors: {
-        primary: '#1c1c22',
+        primary: '#1b1b1b',
+        secundary: '#2e2e2e',
         accent: {
-          DEFAULT: '#00ff99',
-          hover: '#00e187',
+          DEFAULT: '#007c7c',
+          hover: '#00baba',
         },
       },
       keyframes: {
