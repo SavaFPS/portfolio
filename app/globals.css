@@ -6,15 +6,76 @@
   body {
     @apply font-primary bg-primary text-white leading-loose;
   }
-  html {
-    @apply scroll-smooth;
+  h1 {
+    @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold;
+  }
+  h2 {
+    @apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold;
+  }
+  h3 {
+    @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold;
   }
 }
 
-.hover-shadow {
-  transition: filter 0.3s ease-in-out;
+.border-spin {
+  margin: 0 auto;
+  text-align: center;
+  background: transparent;
+  border-radius: 100%;
+  z-index: -1;
+  position: relative;
 }
 
-.hover-shadow:hover {
-  filter: drop-shadow(0 0 8px #778da9);
+.border-spin::after,
+.border-spin::before {
+  content: '';
+  position: absolute;
+  background-image: conic-gradient(transparent 20%, #00baba, #007c7c);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  border-radius: 100%;
+  z-index: -1;
+  animation: 3s spin linear infinite;
+}
+
+.border-spin::before {
+  filter: blur(20px);
+  opacity: 0.8;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 1200px) {
+  .border-spin {
+    width: 350px;
+    height: 350px;
+  }
+
+  .border-spin::after,
+  .border-spin::before {
+    height: 355px;
+    width: 355px;
+  }
+}
+
+@media (max-width: 768px) {
+  .border-spin {
+    width: 250px;
+    height: 250px;
+  }
+
+  .border-spin::after,
+  .border-spin::before {
+    height: 255px;
+    width: 255px;
+  }
 }

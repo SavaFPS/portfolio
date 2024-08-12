@@ -3,8 +3,8 @@ import { Button } from './ui/button';
 
 // componenets
 import Nav from './Nav';
-import Logo from '@/public/Logo';
 import MobileNav from './MobileNav';
+import Logo from '@/public/Logo';
 
 const Header = () => {
   return (
@@ -12,7 +12,7 @@ const Header = () => {
       <div className="container flex justify-between items-center">
         {/* Logo */}
         <Link href="/">
-          <Logo className={`w-10 sm:w-14 md:w-16 xl:w-20`} />
+          <Logo className="w-10 sm:w-14 md:w-16 xl:w-20 transition-filter duration-300 ease-in-out hover:drop-shadow-custom" />
         </Link>
 
         {/* Descktop Nav */}

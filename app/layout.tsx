@@ -1,15 +1,15 @@
 import type { Metadata } from 'next';
-import { League_Spartan } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 
 // components
 import Header from '@/components/Header';
 import PageTransition from './PageTransition';
 
-const LeagueSpartan = League_Spartan({
+const PoppinsFont = Poppins({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
-  variable: '--font-LeagueSpartan',
+  variable: '--font-PoppinsFont',
 });
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={LeagueSpartan.variable}>
+      <body className={PoppinsFont.variable}>
         <Header />
         <PageTransition>{children}</PageTransition>
       </body>

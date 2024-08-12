@@ -21,17 +21,19 @@ const config = {
       xl: '1200px',
     },
     fontFamily: {
-      primary: 'var(--font-jetbrainsMono)',
+      primary: 'var(--font-PoppinsFont)',
     },
     extend: {
+      dropShadow: {
+        custom: '0 0 12px #00f8f8',
+      },
       colors: {
-        primary: '#0d1b2a',
-        secundary: '#1b263b',
+        primary: '#1b1b1b',
+        secundary: '#2e2e2e',
         accent: {
-          DEFAULT: '#778da9',
-          hover: '#415a77',
+          DEFAULT: '#007c7c',
+          hover: '#00baba',
         },
-        // colors: #0d1b2a , #1b263b , #415a77 , #778da9 , #e0e1dd
       },
       keyframes: {
         'accordion-down': {

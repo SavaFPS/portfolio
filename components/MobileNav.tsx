@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { CiMenuFries } from 'react-icons/ci';
 import { useState } from 'react';
 import { Button } from './ui/button';
+import { usePathname } from 'next/navigation';
 
 const links = [
   {
@@ -22,8 +23,8 @@ const links = [
     path: '/resume',
   },
   {
-    name: 'services',
-    path: '/services',
+    name: 'technologies',
+    path: '/technologies',
   },
   {
     name: 'work',
@@ -36,6 +37,7 @@ const links = [
 ];
 
 const MobileNav = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const closeSheet = () => {
@@ -44,7 +46,7 @@ const MobileNav = () => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger className="flex justify-center items-center">
-        <CiMenuFries className="text-[28px]  hover:text-accent transition-all duration-300 " />
+        <CiMenuFries className="text-[28px] hover:text-accent transition-all duration-300 " />
       </SheetTrigger>
       <SheetContent className="flex flex-col">
         <SheetTitle className="hidden">Menu</SheetTitle>
@@ -58,7 +60,9 @@ const MobileNav = () => {
                 onClick={closeSheet}
                 href={link.path}
                 key={index}
-                className="capitalize font-medium"
+                className={`${
+                  link.path === pathname && 'text-accent'
+                }  capitalize font-medium hover:text-accent transition-all`}
               >
                 {link.name}
               </Link>
