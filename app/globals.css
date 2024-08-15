@@ -54,7 +54,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .border-spin {
     width: 350px;
     height: 350px;
