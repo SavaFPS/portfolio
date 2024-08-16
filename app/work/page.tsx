@@ -71,9 +71,9 @@ const Work = () => {
             <div className="flex flex-col gap-8 ">
               <div className="flex flex-col gap-8 group">
                 {/* Number */}
-                <div className="text-8xl leading-none font-extrabold text-transparent font-outline-2">
+                <h1 className="text-8xl leading-none font-extrabold text-transparent font-outline-2">
                   {project.num}
-                </div>
+                </h1>
                 {/* Category */}
                 <h2 className="text-5xl font-bold leading-none capitalize text-white group-hover:text-accent transition-all duration-300">
                   {project.category} project
@@ -98,20 +98,18 @@ const Work = () => {
               <div className="border border-white/20"></div>
 
               {/* Live Project & Arrow */}
-              <div className="flex">
-                <Link href={project.path}>
-                  <TooltipProvider delayDuration={200}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-16 h-16 rounded-full bg-secundary justify-center items-center group2 flex group">
-                        <BsArrowUpRight className="text-white text-3xl group-hover:text-accent transition-all duration-300" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p className="capitalize">Live project</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
-              </div>
+              <Link href={project.path}>
+                <TooltipProvider delayDuration={200}>
+                  <Tooltip>
+                    <TooltipTrigger className="w-16 h-16 rounded-full bg-secundary justify-center items-center group2 flex group">
+                      <BsArrowUpRight className="text-white text-3xl group-hover:text-accent transition-all duration-300" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="capitalize">Live project</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </Link>
             </div>
           </div>
           <div className="w-full xl:w-1/2">
@@ -132,6 +130,8 @@ const Work = () => {
                           fill
                           className="object-contain"
                           alt="Project Pitcure"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          priority
                         />
                       </div>
                     </div>
