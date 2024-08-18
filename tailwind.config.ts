@@ -27,6 +27,12 @@ const config = {
       dropShadow: {
         custom: '0 0 12px #00f8f8',
       },
+      rotate: {
+        'y-180': 'rotateY(180deg)',
+      },
+      perspective: {
+        '1000': '1000px',
+      },
       colors: {
         primary: '#1b1b1b',
         secundary: '#2e2e2e',
