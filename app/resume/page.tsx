@@ -1,13 +1,12 @@
 'use client';
 
-import { FaHtml5, FaCss3, FaReact } from 'react-icons/fa';
+import { FaHtml5, FaCss3, FaReact, FaNodeJs } from 'react-icons/fa';
 import {
   SiTailwindcss,
   SiNextdotjs,
   SiGithub,
   SiTypescript,
   SiJavascript,
-  SiFramer,
 } from 'react-icons/si';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -139,8 +138,8 @@ const skills = {
       icon: <SiGithub />,
     },
     {
-      name: 'Framer Motion',
-      icon: <SiFramer />,
+      name: 'NodeJs',
+      icon: <FaNodeJs />,
     },
   ],
 };

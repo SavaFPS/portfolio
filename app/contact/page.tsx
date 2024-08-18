@@ -4,13 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
-import {
-  FaPhoneAlt,
-  FaEnvelope,
-  FaLocationArrow,
-  FaSearchLocation,
-  FaRegClosedCaptioning,
-} from 'react-icons/fa';
+import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from 'react-icons/fa';
 
 const info = [
   {
@@ -24,7 +18,7 @@ const info = [
     description: 'sava.tasic23@gmail.com',
   },
   {
-    icon: <FaRegClosedCaptioning />,
+    icon: <FaMapMarkedAlt />,
     title: 'Location',
     description: 'Niš, Serbia',
   },
