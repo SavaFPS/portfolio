@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { FaHtml5, FaCss3, FaReact, FaNodeJs } from 'react-icons/fa';
+import { FaHtml5, FaCss3, FaReact, FaNode } from 'react-icons/fa';
 import {
   SiTailwindcss,
   SiNextdotjs,
@@ -20,7 +20,7 @@ export type CardProps = {
 };
 
 const cardIcons: Omit<CardProps, 'id'>[] = [
-  { icon: <FaHtml5 />, matched: false },
+  { icon: <FaHtml5 className="text-[60px]" />, matched: false },
   { icon: <FaCss3 />, matched: false },
   { icon: <SiJavascript className="rounded-md" />, matched: false },
   { icon: <SiTypescript />, matched: false },
@@ -28,7 +28,7 @@ const cardIcons: Omit<CardProps, 'id'>[] = [
   { icon: <FaReact />, matched: false },
   { icon: <SiNextdotjs />, matched: false },
   { icon: <SiGithub />, matched: false },
-  { icon: <FaNodeJs />, matched: false },
+  { icon: <FaNode className="text-[80px]" />, matched: false },
 ];
 
 const Game = () => {

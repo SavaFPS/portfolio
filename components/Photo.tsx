@@ -1,6 +1,6 @@
 'use client';
 
-import { easeIn, easeInOut, motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
 import Image from 'next/image';
 
 const Photo = () => {
@@ -15,7 +15,6 @@ const Photo = () => {
     >
       <div className="border-spin opacity-80">
         <Image
-          sizes="(max-width: 768px) 280px, (max-width: 1200px) 350px"
           src="/assets/photo.png"
           priority
           quality={100}

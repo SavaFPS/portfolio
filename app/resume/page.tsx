@@ -1,6 +1,6 @@
 'use client';
 
-import { FaHtml5, FaCss3, FaReact, FaNodeJs } from 'react-icons/fa';
+import { FaHtml5, FaCss3, FaReact, FaNode, FaLink } from 'react-icons/fa';
 import {
   SiTailwindcss,
   SiNextdotjs,
@@ -18,12 +18,17 @@ import {
 } from '@/components/ui/tooltip';
 import { motion } from 'framer-motion';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import Link from 'next/link';
 
 // about data
 const about = {
   title: 'About Me',
-  description:
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt, odit iure autem eum deserunt totam aspernatur molestiae quisquam esse iste dolore.',
+  description: `I stand out in my work environment because of
+    my positive energy and I enjoy working both in
+    team and individualy. I am thorough and always
+    eager to explore new possibilities. I am always
+    open to new challenges and opportunities for
+    personal and professional growth.`,
   info: [
     {
       fieldName: 'Name',
@@ -55,8 +60,11 @@ const about = {
 // experience data
 const experience = {
   title: 'My Experience',
-  describtion:
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt, odit iure autem eum deserunt totam aspernatur molestiae quisquam esse iste dolore. 1',
+  describtion: `I have been given different assignments
+  such as Weather Forecast, Official Company Website,
+  where I gained practical experience in web
+  development by debugging code, building user
+  interfaces and implementing functionality`,
   items: {
     company: 'Future Proof Soft',
     position: 'Frontend Developer',
@@ -69,32 +77,27 @@ const education = {
   icon: '',
   title: 'My Education',
   describtion:
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt, odit iure autem eum deserunt totam aspernatur molestiae quisquam esse iste dolore. 2',
+    'During my time at Future-Proof Soft, I have successfully completed courses in JavaScript, HTML & CSS, TypeScript, ReactJS & NextJS, Framer Motion, and NodeJS. I am continually updating my knowledge to stay current with the latest advancements in the field.',
   items: [
     {
-      institution: 'Future Proof Soft',
-      degree: 'Frontend Developer',
-      duration: '2021 Oct. - Present',
+      institution: 'Udemy Online Course',
+      degree: 'Real-World Websites with HTML and CSS',
+      path: 'https://www.udemy.com/course/design-and-develop-a-killer-website-with-html5-and-css3/',
     },
     {
-      institution: 'Future Proof Soft',
-      degree: 'Frontend Developer',
-      duration: '2021 Oct. - Present',
+      institution: 'Udemy Online Course',
+      degree: 'The Complete JavaScript Course: From Zero to Expert!',
+      path: 'https://www.udemy.com/course/the-complete-javascript-course/',
     },
     {
-      institution: 'Future Proof Soft',
-      degree: 'Frontend Developer',
-      duration: '2021 Oct. - Present',
+      institution: 'Udemy Online Course',
+      degree: 'Node.js, Express, MongoDB & More: The Complete Bootcamp',
+      path: 'https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/',
     },
     {
-      institution: 'Future Proof Soft',
-      degree: 'Frontend Developer',
-      duration: '2021 Oct. - Present',
-    },
-    {
-      institution: 'Future Proof Soft',
-      degree: 'Frontend Developer',
-      duration: '2021 Oct. - Present',
+      institution: 'Udemy Online Course',
+      degree: 'React Course: React, Next.js, Redux',
+      path: 'https://www.udemy.com/course/the-ultimate-react-course/',
     },
   ],
 };
@@ -102,12 +105,10 @@ const education = {
 // skills data
 const skills = {
   title: 'My Skills',
-  describtion:
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt, odit iure autem eum deserunt totam aspernatur molestiae quisquam esse iste dolore.',
   skillList: [
     {
       name: 'html 5',
-      icon: <FaHtml5 />,
+      icon: <FaHtml5 className="text-[70px]" />,
     },
     {
       name: 'CSS 3',
@@ -139,7 +140,7 @@ const skills = {
     },
     {
       name: 'NodeJs',
-      icon: <FaNodeJs />,
+      icon: <FaNode className="text-[90px]" />,
     },
   ],
 };
@@ -172,7 +173,7 @@ const Resume = () => {
             <TabsContent value="experience" className="w-full">
               <div className="flex flex-col gap-8 text-center xl:text-left">
                 <h3 className="text-4xl font-bold">{experience.title}</h3>
-                <p className="max-w-[600px] text-base text-white/70 mx-auto xl:mx-0">
+                <p className="max-w-[500px] text-base text-white/70 mx-auto xl:mx-0">
                   {experience.describtion}
                 </p>
                 <div className="bg-secundary py-6 px-10 rounded-xl flex flex-col justify-center items-center self-center xl:self-start lg:items-start gap-1 w-fit">
@@ -200,20 +201,29 @@ const Resume = () => {
                   {education.describtion}
                 </p>
                 <ScrollArea className="h-[320px]">
-                  <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
+                  <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {education.items.map((item, index) => {
                       return (
                         <li
                           key={index}
-                          className="bg-secundary py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
+                          className="bg-secundary py-6 px-10 rounded-xl flex flex-col  items-center lg:items-start gap-1 justify-between"
                         >
-                          <span className="text-accent">{item.duration}</span>
                           <h3 className="text-xl text-center lg:text-left">
                             {item.degree}
                           </h3>
-                          <div className="flex items-center gap-3 justify-center xl:justify-start">
-                            <span className="w-2 h-2 rounded-full bg-accent"></span>
-                            <p className="text-white/70">{item.institution}</p>
+                          <div className="flex w-full items-center gap-3 justify-between xl:justify-between">
+                            <div className="flex items-center gap-3 justify-center xl:justify-start">
+                              <span className="w-2 h-2 rounded-full bg-accent"></span>
+                              <p className="text-white/70">
+                                {item.institution}
+                              </p>
+                            </div>
+
+                            <Link href={item.path} target="_blank">
+                              <div className="group w-10 h-10 bg-primary justify-center rounded-full flex items-center">
+                                <FaLink className="text-white text-md group-hover:text-accent transition-all duration-300" />
+                              </div>
+                            </Link>
                           </div>
                         </li>
                       );
@@ -226,12 +236,8 @@ const Resume = () => {
             {/* Skills */}
             <TabsContent value="skills" className="w-full">
               <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-8 text-center xl:text-left">
-                  <h3 className="text-4xl font-bold">{skills.title}</h3>
-                  <p className="max-w-[600px] text-base text-white/70 mx-auto xl:mx-0">
-                    {skills.describtion}
-                  </p>
-                </div>
+                <h3 className="text-4xl font-bold">{skills.title}</h3>
+
                 <ul className="grid grid-cols-2 sm:grid-cols-3 xl:gap-8 lg:gap-6 gap-4">
                   {skills.skillList.map((skill, index) => {
                     return (

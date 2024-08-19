@@ -23,29 +23,30 @@ const projects = [
     category: 'frontend',
     title: 'Official Web Site',
     description:
-      'Official Site for Future Proof SoftOfficial Site for Future Proof SoftOfficial Site for Future Proof SoftOfficial Site for Future Proof SoftOfficial Site for Future Proof Soft',
-    stack: [{ name: 'React' }, { name: 'TypeScript' }],
+      'Official website for Future Proof Soft using Tailwind CSS and React. My role focused on implementing the functionality and responsiveness of the site, ensuring a seamless and dynamic user experience.',
+    stack: [{ name: 'React' }, { name: 'TypeScript' }, { name: 'Tailwind' }],
     image: '/assets/work/fps.png',
     path: 'https://www.futureproofsoft.com/',
   },
   {
     num: '02',
     category: 'frontend',
-    title: 'Official Web Site',
+    title: 'Omnifood',
     description:
-      'Official Site for Future Proof SoftOfficial Site for Future Proof SoftOfficial Site for Future Proof Soft',
-    stack: [{ name: 'React' }, { name: 'TypeScript' }],
-    image: '/assets/work/fps.png',
-    path: 'https://www.futureproofsoft.com/',
+      'Working on this project was an amazing and exciting experience. Using HTML, CSS, and JavaScript, I had the opportunity to create interactive web page. ',
+    stack: [{ name: 'Html 5' }, { name: 'Css' }, { name: 'JavaScript' }],
+    image: '/assets/work/omnifood.png',
+    path: 'https://omnifood-sava.netlify.app/',
   },
   {
     num: '03',
     category: 'frontend',
-    title: 'Official Web Site',
-    description: 'Official Site for Future Proof Soft',
-    stack: [{ name: 'React' }, { name: 'TypeScript' }],
-    image: '/assets/work/fps.png',
-    path: 'https://www.futureproofsoft.com/',
+    title: 'Weather forecast',
+    description:
+      'Weather Forecast is built with React, TypeScript, and Material-UI. It has a clean, user-friendly design thanks to Material-UI. The app shows current weather and forecasts, making it easy for users to check the weather.',
+    stack: [{ name: 'React' }, { name: 'TypeScript' }, { name: 'MaterialUI' }],
+    image: '/assets/work/weather.png',
+    path: 'https://sava-weather.netlify.app/',
   },
 ];
 
@@ -80,7 +81,7 @@ const Work = () => {
                 </h2>
 
                 {/* Description */}
-                <p className="text-white/70">{project.description}</p>
+                <p className="text-white/70 xl:h-28">{project.description}</p>
 
                 {/* Stack */}
                 <ul className="flex gap-4">
