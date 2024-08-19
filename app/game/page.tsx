@@ -52,6 +52,8 @@ const Game = () => {
 
   // Handle a choice
   const handleChoice = (card: CardProps) => {
+    if (card === choiceOne || disabled) return;
+
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 

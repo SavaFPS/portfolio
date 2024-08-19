@@ -42,7 +42,7 @@ const MobileNav = () => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger className="flex justify-center items-center">
-        <CiMenuFries className="text-[28px] hover:text-accent transition-all duration-300 " />
+        <CiMenuFries className="text-4xl hover:text-accent transition-all duration-300 " />
       </SheetTrigger>
       <SheetContent className="flex flex-col">
         <SheetTitle className="hidden">Menu</SheetTitle>
@@ -58,14 +58,16 @@ const MobileNav = () => {
                 key={index}
                 className={`${
                   link.path === pathname && 'text-accent'
-                }  capitalize font-medium hover:text-accent transition-all`}
+                }  capitalize font-medium text-2xl  hover:text-accent transition-all`}
               >
                 {link.name}
               </Link>
             );
           })}
           <Link onClick={closeSheet} href="/contact">
-            <Button>Contact</Button>
+            <Button size={'lg'} className="font-extrabold">
+              Contact
+            </Button>
           </Link>
         </nav>
       </SheetContent>
