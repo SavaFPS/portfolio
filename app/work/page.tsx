@@ -99,7 +99,7 @@ const Work = () => {
               <div className="border border-white/20"></div>
 
               {/* Live Project & Arrow */}
-              <Link href={project.path}>
+              <Link href={project.path} target="_blank">
                 <TooltipProvider delayDuration={200}>
                   <Tooltip>
                     <TooltipTrigger className="w-16 h-16 rounded-full bg-secundary justify-center items-center group2 flex group">
