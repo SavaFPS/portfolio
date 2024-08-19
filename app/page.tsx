@@ -29,7 +29,7 @@ const Home = () => {
             </h1>
             {/* Button and Socials */}
             <div className="flex flex-col xl:flex-row items-center gap-8">
-              <a href="/cv/SavaCV.pdf" download>
+              <a href="/cv/SavaResume.pdf" download>
                 <Button
                   variant="outline"
                   size="lg"

@@ -34,7 +34,7 @@ const Contact = () => {
         opacity: 1,
         transition: { delay: 0.6, duration: 0.4, ease: 'easeIn' },
       }}
-      className="py-6 "
+      className="py-6"
     >
       <div className="container mx-auto xl:py-0 py-6">
         <div className="flex flex-col xl:flex-row gap-8">
