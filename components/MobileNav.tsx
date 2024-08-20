@@ -65,7 +65,7 @@ const MobileNav = () => {
             );
           })}
           <Link onClick={closeSheet} href="/contact">
-            <Button size={'lg'} className="font-extrabold">
+            <Button size="lg" className="font-extrabold">
               Contact
             </Button>
           </Link>

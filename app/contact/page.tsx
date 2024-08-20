@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -31,22 +30,40 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [firstName, setFirstName] = useState('');
+  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMessage(''); // Reset error message
 
     if (form.current) {
       setIsLoading(true);
       try {
-        await emailjs.sendForm(
-          process.env.NEXT_PUBLIC_SERVICE_ID as string,
-          process.env.NEXT_PUBLIC_TEMPLATE_ID as string,
-          form.current,
-          process.env.NEXT_PUBLIC_PUBLIC_KEY as string
-        );
-        setIsSuccess(true);
+        const response = await fetch('/api/sendEmail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstName: form.current['firstname'].value,
+            lastName: form.current['lastname'].value,
+            email: form.current['email'].value,
+            phone: form.current['phone'].value,
+            message: form.current['message'].value,
+          }),
+        });
+
+        if (response.ok) {
+          setIsSuccess(true);
+        } else {
+          setErrorMessage(
+            'Failed to send the message. Please try again later.'
+          );
+          console.log('Error:', response.statusText);
+        }
       } catch (error) {
-        alert('Failed to send the message');
+        setErrorMessage('Failed to send the message. Please try again later.');
         console.log(error);
       } finally {
         setIsLoading(false);
@@ -58,6 +75,7 @@ const Contact = () => {
     setIsSuccess(false);
     form.current?.reset();
     setFirstName('');
+    setMessage('');
   };
 
   return (
@@ -71,7 +89,6 @@ const Contact = () => {
     >
       <div className="container mx-auto xl:py-0 py-6">
         <div className="flex flex-col xl:flex-row gap-8">
-          {/* Form */}
           {!isSuccess ? (
             <div className="xl:w-[55%] order-2 xl:order-none">
               <form
@@ -83,28 +100,46 @@ const Contact = () => {
                   Let&#39;s make the first step.
                 </h3>
 
-                {/* Input */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
-                    type="firstname"
+                    type="text"
+                    name="firstname"
                     placeholder="First Name"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
                   />
-                  <Input type="lastname" placeholder="Last Name" required />
-                  <Input type="email" placeholder="Email address" required />
-                  <Input type="phone" placeholder="Phone Number" required />
+                  <Input
+                    type="text"
+                    name="lastname"
+                    placeholder="Last Name"
+                    required
+                  />
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="Email address"
+                    required
+                  />
+                  <Input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    required
+                  />
                 </div>
 
-                {/* Textarea */}
                 <Textarea
+                  name="message"
                   className="h-52"
                   placeholder="Type your message here"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   required
                 />
 
-                {/* Button */}
+                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+
                 <div className="flex justify-center items-center">
                   <Button
                     type="submit"
@@ -113,10 +148,7 @@ const Contact = () => {
                     disabled={isLoading}
                   >
                     {isLoading ? (
-                      <div
-                        className="w-6 h-6 rounded-full animate-spin
-                      border-4 border-solid border-primary border-t-transparent"
-                      ></div>
+                      <div className="w-6 h-6 rounded-full animate-spin border-4 border-solid border-primary border-t-transparent"></div>
                     ) : (
                       'Send message'
                     )}
@@ -146,22 +178,19 @@ const Contact = () => {
             </div>
           )}
 
-          {/* Info */}
           <div className="flex-1 flex items-center xl:justify-center order-1 xl:order-none mb-8 xl:mb-0">
             <ul className="flex flex-col gap-10">
-              {info.map((info, index) => {
-                return (
-                  <li key={index} className="flex items-center gap-6">
-                    <div className="w-14 h-14 xl:w-[72px] xl:h-[72px] bg-secundary text-accent rounded-full justify-center items-center flex">
-                      <div className="text-3xl">{info.icon}</div>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-white/70">{info.title}</p>
-                      <h3 className="text-xl">{info.description}</h3>
-                    </div>
-                  </li>
-                );
-              })}
+              {info.map((info, index) => (
+                <li key={index} className="flex items-center gap-6">
+                  <div className="w-14 h-14 xl:w-[72px] xl:h-[72px] bg-secundary text-accent rounded-full justify-center items-center flex">
+                    <div className="text-3xl">{info.icon}</div>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-white/70">{info.title}</p>
+                    <h3 className="text-xl">{info.description}</h3>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

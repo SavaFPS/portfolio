@@ -91,6 +91,11 @@ const education = {
     },
     {
       institution: 'Udemy Online Course',
+      degree: 'Understanding<br/> TypeScript',
+      path: 'https://www.udemy.com/course/understanding-typescript/',
+    },
+    {
+      institution: 'Udemy Online Course',
       degree: 'Node.js, Express, MongoDB & More: The Complete Bootcamp',
       path: 'https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/',
     },
@@ -211,7 +216,7 @@ const Resume = () => {
                           <h3 className="text-xl text-center lg:text-left">
                             {item.degree}
                           </h3>
-                          <div className="flex w-full items-center gap-3 justify-between xl:justify-between">
+                          <div className="flex flex-col lg:flex-row w-full items-center gap-3 justify-between xl:justify-between">
                             <div className="flex items-center gap-3 justify-center xl:justify-start">
                               <span className="w-2 h-2 rounded-full bg-accent"></span>
                               <p className="text-white/70">
@@ -245,7 +250,7 @@ const Resume = () => {
                         <TooltipProvider delayDuration={200}>
                           <Tooltip>
                             <TooltipTrigger className="w-full h-[150px] bg-secundary flex justify-center rounded-xl items-center group">
-                              <div className="text-6xl text-center group-hover:text-accent duration-300 transition-all">
+                              <div className="text-6xl text-center xl:group-hover:text-accent duration-300 transition-all">
                                 {skill.icon}
                               </div>
                             </TooltipTrigger>
