@@ -60,11 +60,11 @@ const Contact = () => {
           setErrorMessage(
             'Failed to send the message. Please try again later.'
           );
-          console.log('Error:', response.statusText);
+          console.error('Error:', response.statusText);
         }
       } catch (error) {
         setErrorMessage('Failed to send the message. Please try again later.');
-        console.log(error);
+        console.error(error);
       } finally {
         setIsLoading(false);
       }
