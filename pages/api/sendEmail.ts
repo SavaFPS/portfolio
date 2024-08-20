@@ -10,6 +10,7 @@ export default async function sendEmail(
   if (req.method === 'POST') {
     const { firstName, lastName, email, phone, message } = req.body;
 
+    console.log('i am here', req.body);
     // Customize the email message
     const emailMessage = `
       <div style="font-family: Arial, sans-serif; line-height: 1.5;">
@@ -45,7 +46,7 @@ export default async function sendEmail(
 
       res.status(200).json({ message: 'Email sent successfully!' });
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.log('Error sending email:', error);
       res.status(500).json({ message: 'Failed to send email.' });
     }
   } else {
