@@ -31,6 +31,21 @@ const projects = [
   {
     num: '02',
     category: 'frontend',
+    title: 'Bio Panel',
+    description:
+      'I built a sleek, responsive Shopify website for a local client to showcase their wall panels, complete with product details and a user-friendly interface.',
+    stack: [
+      { name: 'Html 5' },
+      { name: 'Css' },
+      { name: 'JavaScript' },
+      { name: 'Shopify' },
+    ],
+    image: '/assets/work/biopanel.png',
+    path: 'https://biopanel.rs/',
+  },
+  {
+    num: '03',
+    category: 'frontend',
     title: 'Omnifood',
     description:
       'Working on this project was an amazing and exciting experience. Using HTML, CSS, and JavaScript, I had the opportunity to create interactive web page. ',
@@ -39,7 +54,7 @@ const projects = [
     path: 'https://omnifood-sava.netlify.app/',
   },
   {
-    num: '03',
+    num: '04',
     category: 'frontend',
     title: 'Weather forecast',
     description:
@@ -77,7 +92,7 @@ const Work = () => {
                 </h1>
                 {/* Category */}
                 <h2 className="text-5xl font-bold leading-none capitalize text-white group-hover:text-accent transition-all duration-300">
-                  {project.category} project
+                  {project.title}
                 </h2>
 
                 {/* Description */}
