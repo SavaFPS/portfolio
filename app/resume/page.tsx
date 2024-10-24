@@ -91,7 +91,7 @@ const education = {
     },
     {
       institution: 'Udemy Online Course',
-      degree: 'Understanding<br/> TypeScript',
+      degree: 'Understanding TypeScript',
       path: 'https://www.udemy.com/course/understanding-typescript/',
     },
     {
