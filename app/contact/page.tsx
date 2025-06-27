@@ -16,7 +16,7 @@ const info = [
   {
     icon: <FaEnvelope />,
     title: 'email',
-    description: 'sava.tasic23@gmail.com',
+    description: 'sava.tasic018@gmail.com',
   },
   {
     icon: <FaMapMarkedAlt />,
@@ -35,7 +35,7 @@ const Contact = () => {
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrorMessage(''); // Reset error message
+    setErrorMessage('');
 
     if (form.current) {
       setIsLoading(true);
@@ -108,12 +108,14 @@ const Contact = () => {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
+                    maxLength={25}
                   />
                   <Input
                     type="text"
                     name="lastname"
                     placeholder="Last Name"
                     required
+                    maxLength={25}
                   />
                   <Input
                     type="email"
@@ -136,6 +138,7 @@ const Contact = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
+                  maxLength={500}
                 />
 
                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
