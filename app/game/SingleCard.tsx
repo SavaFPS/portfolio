@@ -9,6 +9,7 @@ interface SingleCardProps {
   handleChoice: (card: CardProps) => void;
   flipped: boolean;
   disabled: boolean;
+  delay: number;
 }
 
 const SingleCard: React.FC<SingleCardProps> = ({
@@ -16,6 +17,7 @@ const SingleCard: React.FC<SingleCardProps> = ({
   handleChoice,
   flipped,
   disabled,
+  delay,
 }) => {
   const handleClick = () => {
     if (!disabled) {
@@ -29,8 +31,10 @@ const SingleCard: React.FC<SingleCardProps> = ({
       className={`relative cursor-pointer w-full h-[70px] md:h-[100px] ${
         card.matched ? 'text-accent transition-all duration-500 delay-300' : ''
       }`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay }}
       whileHover={{ scale: 1.1 }}
-      transition={{ duration: 0.3 }}
     >
       {/* Card Container */}
       <motion.div

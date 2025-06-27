@@ -21,44 +21,52 @@ const projects = [
   {
     num: '01',
     category: 'frontend',
-    title: 'Official Web Site',
+    title: 'Mentortools',
+    subject: 'Learning Platform',
     description:
-      'Official website for Future Proof Soft using Tailwind CSS and React. My role focused on implementing the functionality and responsiveness of the site, ensuring a seamless and dynamic user experience.',
+      'Contributed to a scalable mentorship and online course platform. Migrated the core frontend from Angular to React to improve performance and maintainability, integrated TanStack Query for efficient data handling, and implemented dynamic forms with React Hook Form and Zod.',
+    stack: [
+      { name: 'Next.js' },
+      { name: 'TypeScript' },
+      { name: 'Material UI' },
+    ],
+    image: '/assets/work/mentortools.png',
+    path: 'https://mentortools.com//',
+  },
+  {
+    num: '02',
+    category: 'frontend',
+    title: 'Future Proof Soft',
+    subject: 'Company Website',
+    description:
+      'Designed and developed the official website using React and Tailwind CSS. Focused on responsiveness and interactivity, ensuring a seamless user experience across devices. Collaborated closely with the team to deliver a clean and functional frontend interface.',
     stack: [{ name: 'React' }, { name: 'TypeScript' }, { name: 'Tailwind' }],
     image: '/assets/work/fps.png',
     path: 'https://www.futureproofsoft.com/',
   },
   {
-    num: '02',
+    num: '03',
     category: 'frontend',
-    title: 'Bio Panel',
+    title: 'Shopify E-Commerce',
+    subject: 'Wall Panels Website',
     description:
-      'I built a sleek, responsive Shopify website for a local client to showcase their wall panels, complete with product details and a user-friendly interface.',
+      'Built a modern, responsive Shopify website for a local business to showcase their wall panel products. Implemented a user-friendly interface, organized product pages, and ensured mobile-first performance for better engagement and conversions.',
     stack: [
       { name: 'Html 5' },
       { name: 'Css' },
       { name: 'JavaScript' },
-      { name: 'Shopify' },
+      { name: 'Shopify Liquid' },
     ],
     image: '/assets/work/biopanel.png',
     path: 'https://biopanel.rs/',
   },
   {
-    num: '03',
-    category: 'frontend',
-    title: 'Omnifood',
-    description:
-      'Working on this project was an amazing and exciting experience. Using HTML, CSS, and JavaScript, I had the opportunity to create interactive web page. ',
-    stack: [{ name: 'Html 5' }, { name: 'Css' }, { name: 'JavaScript' }],
-    image: '/assets/work/omnifood.png',
-    path: 'https://omnifood-sava.netlify.app/',
-  },
-  {
     num: '04',
     category: 'frontend',
-    title: 'Weather forecast',
+    title: 'Weather Forecast',
+    subject: 'Internship Project',
     description:
-      'Weather Forecast is built with React, TypeScript, and Material-UI. It has a clean, user-friendly design thanks to Material-UI. The app shows current weather and forecasts, making it easy for users to check the weather.',
+      'Developed during my training at Future Proof Soft to strengthen my skills in React and TypeScript. This project displays current weather conditions and forecasts in a clean and responsive UI using Material UI. It allowed me to practice API integration, component structure, and styling with a modern design system in a real-world setting.',
     stack: [{ name: 'React' }, { name: 'TypeScript' }, { name: 'MaterialUI' }],
     image: '/assets/work/weather.png',
     path: 'https://sava-weather.netlify.app/',
@@ -82,27 +90,34 @@ const Work = () => {
       className="flex flex-col justify-center xl:py-12"
     >
       <div className="container mx-auto">
-        <div className="flex flex-col xl:flex-row xl:gap-8 ">
+        <div className="flex flex-col xl:flex-row xl:gap-8">
           <div className="w-full xl:w-1/2 flex flex-col xl:justify-between xl:order-none order-2">
-            <div className="flex flex-col gap-8 ">
-              <div className="flex flex-col gap-8 group">
+            <div className="flex flex-col gap-4 pb-8 -mt-14 sm:-m-8 md:m-0">
+              <div className="flex flex-col gap-6 group">
                 {/* Number */}
                 <h1 className="text-8xl leading-none font-extrabold text-transparent font-outline-2">
                   {project.num}
                 </h1>
                 {/* Category */}
-                <h2 className="text-5xl font-bold leading-none capitalize text-white group-hover:text-accent transition-all duration-300">
-                  {project.title}
-                </h2>
+                <div>
+                  <h2 className="text-3xl font-bold leading-none capitalize text-white group-hover:text-accent transition-all duration-300">
+                    {project.title}
+                  </h2>
+                  <h2 className="text-3xl font-bold leading-none capitalize text-white group-hover:text-accent transition-all duration-300">
+                    {project.subject}
+                  </h2>
+                </div>
 
                 {/* Description */}
-                <p className="text-white/70 xl:h-28">{project.description}</p>
+                <p className="text-base text-white/70 xl:h-28">
+                  {project.description}
+                </p>
 
                 {/* Stack */}
-                <ul className="flex gap-4">
+                <ul className="flex gap-2">
                   {project.stack.map((item, index) => {
                     return (
-                      <li key={index} className="text-xl text-accent">
+                      <li key={index} className="text-md text-accent">
                         {item.name}
                         {index !== project.stack.length - 1 && ','}
                       </li>

@@ -1,6 +1,13 @@
 'use client';
 
-import { FaHtml5, FaCss3, FaReact, FaNode, FaLink } from 'react-icons/fa';
+import {
+  FaHtml5,
+  FaCss3,
+  FaReact,
+  FaNode,
+  FaLink,
+  FaChevronDown,
+} from 'react-icons/fa';
 import {
   SiTailwindcss,
   SiNextdotjs,
@@ -19,16 +26,22 @@ import {
 import { motion } from 'framer-motion';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import Link from 'next/link';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 // about data
 const about = {
   title: 'About Me',
-  description: `I stand out in my work environment because of
-    my positive energy and I enjoy working both in
-    team and individualy. I am thorough and always
-    eager to explore new possibilities. I am always
-    open to new challenges and opportunities for
-    personal and professional growth.`,
+  description: `Detail-oriented and highly motivated Frontend
+    Developer with a passion for clean design,
+    functional UI, and continuous learning. I thrive in
+    both team-based and individual projects, always
+    seeking opportunities for improvement and
+    growth.`,
   info: [
     {
       fieldName: 'Name',
@@ -48,7 +61,7 @@ const about = {
     },
     {
       fieldName: 'Email',
-      fieldValue: 'sava.tasic23@gmail.com',
+      fieldValue: 'sava.tasic018@gmail.com',
     },
     {
       fieldName: 'Languages',
@@ -60,16 +73,23 @@ const about = {
 // experience data
 const experience = {
   title: 'My Experience',
-  describtion: `I have been given different assignments
-  such as Weather Forecast, Official Company Website,
-  where I gained practical experience in web
-  development by debugging code, building user
-  interfaces and implementing functionality`,
-  items: {
-    company: 'Future Proof Soft',
-    position: 'Frontend Developer',
-    duration: '2021 Oct. - Present',
-  },
+  describtion: `I’ve had the chance to work on all kinds of frontend projects—from building learning platforms to creating clean, responsive UIs—using a variety of tools and technologies.`,
+  items: [
+    {
+      company: 'Future Proof Soft',
+      position: 'Frontend Developer',
+      duration: '2021 Oct. - 2024 Oct.',
+      description:
+        'Completed company-led training in HTML, CSS, JavaScript, TypeScript, React, Framer Motion. Worked on various projects: Weather Forecast App (React, TS, Material UI) Official Company Website (React, TS, Tailwind) Internal Project (React, TS, Tailwind) Developed and debugged UI, built responsive components, and collaborated closely with mentors. Delivered a Shopify-based e-commerce website for a local client.',
+    },
+    {
+      company: 'Mentortools',
+      position: 'Frontend Developer',
+      duration: '2024 Oct. - 2025 June',
+      description:
+        'Worked on Mentortools, a white-label mentorship and online course platform, enabling content creators to build and manage their own learning portals. Migrated core frontend architecture from Angular to React, improving performance and maintainability. Built reusable UI components using React, MUI, and Vuexy design system. Integrated TanStack Query for optimized API data fetching and caching. Developed dynamic and validated forms with React Hook Form, enhancing user experience and data integrity.',
+    },
+  ],
 };
 
 // education data
@@ -181,19 +201,41 @@ const Resume = () => {
                 <p className="max-w-[500px] text-base text-white/70 mx-auto xl:mx-0">
                   {experience.describtion}
                 </p>
-                <div className="bg-secundary py-6 px-10 rounded-xl flex flex-col justify-center items-center self-center xl:self-start lg:items-start gap-1 w-fit">
-                  <span className="text-accent text-xl">
-                    {experience.items.duration}
-                  </span>
-                  <h3 className="text-2xl text-center xl:text-left">
-                    {experience.items.position}
-                  </h3>
-                  <div className="flex items-center gap-3 justify-center xl:justify-start">
-                    <span className="w-2 h-2 rounded-full bg-accent"></span>
-                    <p className="text-xl text-white/70">
-                      {experience.items.company}
-                    </p>
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                  {experience.items.map((item, index) => (
+                    <Accordion
+                      type="single"
+                      collapsible
+                      key={index}
+                      className="bg-secundary py-6 px-10 rounded-xl flex flex-col justify-center items-center gap-1 w-full"
+                    >
+                      <AccordionItem
+                        value={item.company}
+                        className="w-full flex flex-col items-center gap-2 justify-center"
+                      >
+                        <span className="text-accent text-xl">
+                          {item.duration}
+                        </span>
+                        <h3 className="text-2xl text-center xl:text-left">
+                          {item.position}
+                        </h3>
+
+                        <div className="flex items-center gap-3 justify-center">
+                          <span className="w-2 h-2 rounded-full bg-accent"></span>
+                          <p className="text-xl text-white/70">
+                            {item.company}
+                          </p>
+                          <AccordionTrigger className="group w-10 h-10 hover:bg-primary justify-center rounded-full flex items-center transition-all duration-300">
+                            <FaChevronDown className="text-xl group-hover:text-accent transition-all duration-300" />
+                          </AccordionTrigger>
+                        </div>
+
+                        <AccordionContent className="flex flex-col gap-4 text-balance">
+                          <p className="text-white/70">{item.description}</p>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  ))}
                 </div>
               </div>
             </TabsContent>
@@ -205,7 +247,7 @@ const Resume = () => {
                 <p className="max-w-[600px] text-base text-white/70 mx-auto xl:mx-0">
                   {education.describtion}
                 </p>
-                <ScrollArea className="h-[320px]">
+                <ScrollArea className="h-[320px] sm:h-auto">
                   <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {education.items.map((item, index) => {
                       return (

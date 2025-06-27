@@ -116,7 +116,7 @@ const Game = () => {
 
           {/* Game Board */}
           <div className="grid grid-cols-3 sm:grid-cols-6 xl:gap-8 lg:gap-6 gap-4">
-            {cards.map((card) => (
+            {cards.map((card, index) => (
               <SingleCard
                 key={card.id}
                 card={card}
@@ -125,6 +125,7 @@ const Game = () => {
                   card === choiceOne || card === choiceTwo || card.matched
                 }
                 disabled={disabled}
+                delay={Math.random() * 0.5 + index * 0.03}
               />
             ))}
           </div>

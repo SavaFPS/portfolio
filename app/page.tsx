@@ -19,10 +19,10 @@ const Home = () => {
             transition={{ type: 'spring', stiffness: 50, delay: 0.5 }}
             className="text-center xl:text-left xl:w-full"
           >
-            <span className="text-xl">Frontend Developer</span>
-            <h2 className="h1 mb-6 bg-clip-text text-transparent bg-gradient-to-br from-[#007c7c] to-[#00f8f8] ">
+            <span className="text-3xl">Frontend Developer</span>
+            <h1 className="mb-6 bg-clip-text text-transparent bg-gradient-to-br from-[#007c7c] to-[#00f8f8] ">
               Sava Tasić
-            </h2>
+            </h1>
             <h1 className="max-w-[500px] mb-9 text-white/80 text-5xl">
               I bring ideas to life through code.
             </h1>

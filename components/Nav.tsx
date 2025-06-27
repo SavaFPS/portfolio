@@ -17,6 +17,10 @@ const links = [
     path: '/work',
   },
   {
+    name: 'Testimonials',
+    path: '/testimonials',
+  },
+  {
     name: 'mini game',
     path: '/game',
   },
