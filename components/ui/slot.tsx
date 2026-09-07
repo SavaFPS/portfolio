@@ -14,7 +14,7 @@ type SlotProps = HTMLAttributes<HTMLElement> & {
 };
 
 export function Slot({ children, className, ...props }: SlotProps) {
-  const child = Children.only(children);
+  const child = Children.toArray(children).find((node) => isValidElement(node));
 
   if (!isValidElement<{ className?: string }>(child)) {
     throw new Error('Slot expects a single React element child.');
