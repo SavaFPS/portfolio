@@ -12,29 +12,7 @@ import { CiMenuFries } from 'react-icons/ci';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { usePathname } from 'next/navigation';
-
-const links = [
-  {
-    name: 'home',
-    path: '/',
-  },
-  {
-    name: 'resume',
-    path: '/resume',
-  },
-  {
-    name: 'work',
-    path: '/work',
-  },
-  {
-    name: 'testimonials',
-    path: '/testimonials',
-  },
-  {
-    name: 'mini game',
-    path: '/game',
-  },
-];
+import { navLinks } from '@/lib/content';
 
 const MobileNav = () => {
   const pathname = usePathname();
@@ -43,36 +21,35 @@ const MobileNav = () => {
   const closeSheet = () => {
     setIsOpen(false);
   };
+
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger className="flex justify-center items-center">
-        <CiMenuFries className="text-4xl hover:text-accent transition-all duration-300 " />
+      <SheetTrigger className="flex items-center justify-center" aria-label="Open menu">
+        <CiMenuFries className="text-3xl transition-colors duration-300 hover:text-accent" />
       </SheetTrigger>
       <SheetContent className="flex flex-col">
         <SheetTitle className="hidden">Menu</SheetTitle>
         <SheetDescription className="hidden">
           This is the mobile navigation. You can select a link to navigate.
         </SheetDescription>
-        <nav className="flex flex-col justify-center items-center space-y-6 mt-16">
-          {links.map((link, index) => {
-            return (
-              <Link
-                onClick={closeSheet}
-                href={link.path}
-                key={index}
-                className={`${
-                  link.path === pathname && 'text-accent'
-                }  capitalize font-medium text-2xl  hover:text-accent transition-all`}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
-          <Link onClick={closeSheet} href="/contact">
-            <Button size="lg" className="font-extrabold">
+        <nav className="mt-16 flex flex-col items-center justify-center space-y-6">
+          {navLinks.map((link) => (
+            <Link
+              onClick={closeSheet}
+              href={link.path}
+              key={link.path}
+              className={`${
+                link.path === pathname ? 'text-accent' : ''
+              } text-2xl font-medium capitalize transition-colors hover:text-accent`}
+            >
+              {link.name}
+            </Link>
+          ))}
+          <Button asChild size="lg">
+            <Link onClick={closeSheet} href="/contact">
               Contact
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </nav>
       </SheetContent>
     </Sheet>

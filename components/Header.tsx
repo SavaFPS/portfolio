@@ -1,29 +1,24 @@
 import Link from 'next/link';
 import { Button } from './ui/button';
-
-// componenets
 import Nav from './Nav';
 import MobileNav from './MobileNav';
-import Logo from '@/public/Logo';
+import Logo from './Logo';
 
 const Header = () => {
   return (
-    <header className="py-4 xl:py-6 text-white bg-gradient-to-t to-black  from-primary mx-auto">
-      <div className="container flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/">
-          <Logo className="w-16 xl:w-20 transition-filter duration-300 ease-in-out xl:hover:drop-shadow-custom focus:drop-shadow-custom focus:outline-none" />
+    <header className="sticky top-0 z-50 border-b border-cream/10 bg-primary/80 backdrop-blur-md">
+      <div className="container flex items-center justify-between py-4">
+        <Link href="/" aria-label="Home">
+          <Logo className="w-14 transition duration-300 xl:w-16 xl:hover:drop-shadow-glow" />
         </Link>
 
-        {/* Descktop Nav */}
-        <div className="hidden xl:flex items-center gap-8">
+        <div className="hidden items-center gap-8 xl:flex">
           <Nav />
-          <Link href="/contact">
-            <Button>Contact</Button>
-          </Link>
+          <Button asChild>
+            <Link href="/contact">Contact</Link>
+          </Button>
         </div>
 
-        {/* Mobile Nav */}
         <div className="xl:hidden">
           <MobileNav />
         </div>

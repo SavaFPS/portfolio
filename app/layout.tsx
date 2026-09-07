@@ -1,20 +1,28 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Outfit, Syne } from 'next/font/google';
 import './globals.css';
-
-// components
 import Header from '@/components/Header';
-import PageTransition from './PageTransition';
+import Footer from '@/components/Footer';
+import { profile } from '@/lib/content';
 
-const PoppinsFont = Poppins({
+const outfit = Outfit({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
-  variable: '--font-PoppinsFont',
+  variable: '--font-outfit',
+  display: 'swap',
+});
+
+const syne = Syne({
+  subsets: ['latin'],
+  variable: '--font-syne',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Sava Portfolio',
-  description: 'Portfolio',
+  title: {
+    default: `${profile.name} — ${profile.role}`,
+    template: `%s | ${profile.name}`,
+  },
+  description: profile.bio,
 };
 
 export default function RootLayout({
@@ -23,10 +31,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={PoppinsFont.variable}>
+    <html lang="en" className={`${outfit.variable} ${syne.variable}`}>
+      <body className="flex min-h-screen flex-col font-sans">
         <Header />
-        <PageTransition>{children}</PageTransition>
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

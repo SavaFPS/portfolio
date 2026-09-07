@@ -1,71 +1,46 @@
 import type { Config } from 'tailwindcss';
+import tailwindcssAnimate from 'tailwindcss-animate';
 
 const config = {
   darkMode: ['class'],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
-  prefix: '',
+  content: ['./components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}'],
   theme: {
-  	container: {
-  		center: true,
-  		padding: '15px'
-  	},
-  	screens: {
-  		sm: '640px',
-  		md: '768px',
-  		lg: '960px',
-  		xl: '1200px'
-  	},
-  	fontFamily: {
-  		primary: 'var(--font-PoppinsFont)'
-  	},
-  	extend: {
-  		dropShadow: {
-  			custom: '0 0 12px #00f8f8'
-  		},
-  		rotate: {
-  			'y-180': 'rotateY(180deg)'
-  		},
-  		perspective: {
-  			'1000': '1000px'
-  		},
-  		colors: {
-  			primary: '#1b1b1b',
-  			secundary: '#2e2e2e',
-  			accent: {
-  				DEFAULT: '#007c7c',
-  				hover: '#00baba'
-  			}
-  		},
-  		keyframes: {
-  			'accordion-down': {
-  				from: {
-  					height: '0'
-  				},
-  				to: {
-  					height: 'var(--radix-accordion-content-height)'
-  				}
-  			},
-  			'accordion-up': {
-  				from: {
-  					height: 'var(--radix-accordion-content-height)'
-  				},
-  				to: {
-  					height: '0'
-  				}
-  			}
-  		},
-  		animation: {
-  			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
-  	}
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '960px',
+        xl: '1200px',
+      },
+    },
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '960px',
+      xl: '1200px',
+    },
+    fontFamily: {
+      sans: ['var(--font-outfit)'],
+      display: ['var(--font-syne)'],
+    },
+    extend: {
+      dropShadow: {
+        glow: '0 0 18px rgba(224, 138, 79, 0.45)',
+      },
+      colors: {
+        primary: '#100e0c',
+        secondary: '#1c1814',
+        accent: {
+          DEFAULT: '#e08a4f',
+          hover: '#f09a62',
+        },
+        cream: '#f4ece3',
+      },
+    },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
 
 export default config;

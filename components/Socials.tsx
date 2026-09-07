@@ -1,14 +1,17 @@
 import Link from 'next/link';
-import { FaGithub, FaGitlab, FaLinkedinIn } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { profile } from '@/lib/content';
 
 const socials = [
   {
     icon: <FaGithub />,
-    path: 'https://github.com/SavaFPS',
+    path: profile.github,
+    label: 'GitHub',
   },
   {
     icon: <FaLinkedinIn />,
-    path: 'https://www.linkedin.com/in/sava-tasic-428079264/',
+    path: profile.linkedin,
+    label: 'LinkedIn',
   },
 ];
 
@@ -20,18 +23,18 @@ interface SocialsProps {
 const Socials = ({ containerStyles, iconStyles }: SocialsProps) => {
   return (
     <div className={containerStyles}>
-      {socials.map((social, index) => {
-        return (
-          <Link
-            key={index}
-            href={social.path}
-            className={iconStyles}
-            target="_blank"
-          >
-            {social.icon}
-          </Link>
-        );
-      })}
+      {socials.map((social) => (
+        <Link
+          key={social.path}
+          href={social.path}
+          className={iconStyles}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={social.label}
+        >
+          {social.icon}
+        </Link>
+      ))}
     </div>
   );
 };
