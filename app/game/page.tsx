@@ -1,139 +1,124 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { FaHtml5, FaCss3, FaReact, FaNode } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaReact, FaNode } from 'react-icons/fa';
 import {
-  SiTailwindcss,
+  SiGraphql,
   SiNextdotjs,
-  SiGithub,
+  SiPostgresql,
+  SiRedis,
+  SiTailwindcss,
   SiTypescript,
   SiJavascript,
 } from 'react-icons/si';
 import SingleCard from './SingleCard';
+import type { ReactElement } from 'react';
+import PageHeader from '@/components/PageHeader';
 
 export type CardProps = {
-  icon: JSX.Element;
+  icon: ReactElement;
   matched: boolean;
   id: number;
 };
 
 const cardIcons: Omit<CardProps, 'id'>[] = [
-  { icon: <FaHtml5 className="text-[60px]" />, matched: false },
-  { icon: <FaCss3 />, matched: false },
   { icon: <SiJavascript className="rounded-md" />, matched: false },
   { icon: <SiTypescript />, matched: false },
   { icon: <SiTailwindcss />, matched: false },
   { icon: <FaReact />, matched: false },
   { icon: <SiNextdotjs />, matched: false },
-  { icon: <SiGithub />, matched: false },
   { icon: <FaNode className="text-[80px]" />, matched: false },
+  { icon: <SiGraphql />, matched: false },
+  { icon: <SiPostgresql />, matched: false },
+  { icon: <SiRedis />, matched: false },
 ];
 
+const shuffleDeck = (): CardProps[] =>
+  [...cardIcons, ...cardIcons]
+    .sort(() => Math.random() - 0.5)
+    .map((card, index) => ({ ...card, id: index + Math.random() }));
+
 const Game = () => {
-  const [cards, setCards] = useState<CardProps[]>([]);
+  const [cards, setCards] = useState<CardProps[]>(shuffleDeck);
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState<CardProps | null>(null);
   const [choiceTwo, setChoiceTwo] = useState<CardProps | null>(null);
   const [disabled, setDisabled] = useState(false);
 
-  // Shuffle Cards
   const shuffleCards = () => {
-    const shuffledCards = [...cardIcons, ...cardIcons]
-      .sort(() => Math.random() - 0.5)
-      .map((card, index) => ({ ...card, id: index + Math.random() }));
-
     setChoiceOne(null);
     setChoiceTwo(null);
-    setCards(shuffledCards);
+    setCards(shuffleDeck());
     setTurns(0);
-  };
-
-  // Handle a choice
-  const handleChoice = (card: CardProps) => {
-    if (card === choiceOne || disabled) return;
-
-    choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
-  };
-
-  // Compare 2 selected cards
-  useEffect(() => {
-    if (choiceOne && choiceTwo) {
-      setDisabled(true);
-      if (choiceOne.icon.type === choiceTwo.icon.type) {
-        setCards((prevCards) => {
-          return prevCards.map((card) => {
-            if (card.icon.type === choiceOne.icon.type) {
-              return { ...card, matched: true };
-            } else {
-              return card;
-            }
-          });
-        });
-        resetTurn();
-      } else {
-        setTimeout(() => resetTurn(), 1000);
-      }
-    }
-  }, [choiceOne, choiceTwo]);
-
-  // Reset choice & increase turn
-  const resetTurn = () => {
-    setChoiceOne(null);
-    setChoiceTwo(null);
-    setTurns((prevTurns) => prevTurns + 1);
     setDisabled(false);
   };
 
-  // Start new game automatically on mount
-  useEffect(() => {
-    shuffleCards();
-  }, []);
+  const handleChoice = (card: CardProps) => {
+    if (disabled || card === choiceOne || card.matched) return;
+
+    if (!choiceOne) {
+      setChoiceOne(card);
+      return;
+    }
+
+    setChoiceTwo(card);
+    setDisabled(true);
+
+    const isMatch = card.icon.type === choiceOne.icon.type;
+
+    if (isMatch) {
+      setCards((prevCards) =>
+        prevCards.map((item) =>
+          item.icon.type === choiceOne.icon.type
+            ? { ...item, matched: true }
+            : item
+        )
+      );
+      setChoiceOne(null);
+      setChoiceTwo(null);
+      setTurns((prevTurns) => prevTurns + 1);
+      setDisabled(false);
+      return;
+    }
+
+    window.setTimeout(() => {
+      setChoiceOne(null);
+      setChoiceTwo(null);
+      setTurns((prevTurns) => prevTurns + 1);
+      setDisabled(false);
+    }, 1000);
+  };
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { delay: 0.6, duration: 0.4, ease: 'easeIn' },
-      }}
-      className="py-6"
-    >
+    <section className="py-10 xl:py-14">
       <div className="container mx-auto">
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col items-center justify-center gap-6">
-            <h3 className="text-white/70 text-4xl">Memory Game</h3>
-            <Button
-              onClick={shuffleCards}
-              variant="outline"
-              size="md"
-              className="uppercase flex items-center gap-2"
-            >
-              <span>New Game</span>
-            </Button>
-          </div>
-
-          {/* Game Board */}
-          <div className="grid grid-cols-3 sm:grid-cols-6 xl:gap-8 lg:gap-6 gap-4">
-            {cards.map((card, index) => (
-              <SingleCard
-                key={card.id}
-                card={card}
-                handleChoice={handleChoice}
-                flipped={
-                  card === choiceOne || card === choiceTwo || card.matched
-                }
-                disabled={disabled}
-                delay={Math.random() * 0.5 + index * 0.03}
-              />
-            ))}
-          </div>
-
-          <p className="text-white/70 text-center text-xl">Turns: {turns}</p>
+        <div className="mb-8 flex flex-col items-center">
+          <PageHeader
+            kicker="Game"
+            title="Memory game"
+            className="mb-5 text-center"
+          />
+          <Button onClick={shuffleCards} variant="outline" size="md">
+            New game
+          </Button>
         </div>
+
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-6 sm:gap-4">
+          {cards.map((card) => (
+            <SingleCard
+              key={card.id}
+              card={card}
+              handleChoice={handleChoice}
+              flipped={card === choiceOne || card === choiceTwo || card.matched}
+              disabled={disabled}
+            />
+          ))}
+        </div>
+
+        <p className="mt-8 text-center text-lg text-cream/60">Turns: {turns}</p>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

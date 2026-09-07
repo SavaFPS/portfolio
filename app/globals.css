@@ -4,24 +4,40 @@
 
 @layer base {
   body {
-    @apply font-primary bg-primary text-white leading-loose;
-  }
-  h1 {
-    @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold;
-  }
-  h2 {
-    @apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold;
-  }
-  h3 {
-    @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold;
+    @apply font-sans bg-primary text-cream leading-relaxed antialiased;
   }
 
-  .font-outline-2 {
-    -webkit-text-stroke: 2px white;
+  h1 {
+    @apply font-display text-[42px] xl:text-[72px] leading-[1.05] font-semibold tracking-tight;
   }
-  .font-outline-4 {
-    -webkit-text-stroke: 4px white;
+
+  h2 {
+    @apply font-display text-[32px] xl:text-[44px] leading-[1.1] font-semibold tracking-tight;
   }
+
+  h3 {
+    @apply font-display text-[22px] xl:text-[28px] leading-[1.15] font-semibold;
+  }
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(224, 138, 79, 0.14), transparent 55%),
+    radial-gradient(ellipse 40% 30% at 100% 0%, rgba(224, 138, 79, 0.06), transparent 45%);
+}
+
+body::before {
+  content: '';
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .border-spin {
@@ -37,19 +53,18 @@
 .border-spin::before {
   content: '';
   position: absolute;
-  background-image: conic-gradient(transparent 20%, #00baba, #007c7c);
+  background-image: conic-gradient(transparent 20%, #e08a4f, #8a4a24);
   top: 50%;
   left: 50%;
   translate: -50% -50%;
   z-index: -1;
   border-radius: 100%;
-  z-index: -1;
-  animation: 3s spin linear infinite;
+  animation: 8s spin linear infinite;
 }
 
 .border-spin::before {
-  filter: blur(20px);
-  opacity: 0.8;
+  filter: blur(22px);
+  opacity: 0.75;
 }
 
 @keyframes spin {
@@ -69,12 +84,12 @@
 
   .border-spin::after,
   .border-spin::before {
-    height: 325px;
-    width: 325px;
+    height: 328px;
+    width: 328px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .border-spin {
     width: 250px;
     height: 250px;
@@ -82,16 +97,12 @@
 
   .border-spin::after,
   .border-spin::before {
-    height: 255px;
-    width: 255px;
+    height: 258px;
+    width: 258px;
   }
 }
 
-html {
-  scrollbar-gutter: stable;
-}
-
 :-webkit-autofill {
-  box-shadow: inset 0 0 0 220px #1b1b1b !important;
-  -webkit-text-fill-color: rgb(255 255 255 / 0.7);
+  box-shadow: inset 0 0 0 220px #1c1814 !important;
+  -webkit-text-fill-color: rgb(244 236 227 / 0.8);
 }

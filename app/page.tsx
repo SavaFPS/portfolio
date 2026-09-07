@@ -1,61 +1,68 @@
-'use client';
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { FiDownload } from 'react-icons/fi';
-
-// components
+import { FiDownload, FiArrowUpRight } from 'react-icons/fi';
 import Socials from '@/components/Socials';
 import Photo from '@/components/Photo';
+import Link from 'next/link';
+import { profile, stats } from '@/lib/content';
 
 const Home = () => {
   return (
-    <section className="h-full overflow-x-hidden">
-      <div className="container mx-auto h-full">
-        <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-14 xl:pb-24">
-          {/* Text */}
-          <motion.div
-            initial={{ x: '-100vw' }}
-            animate={{ x: 0 }}
-            transition={{ type: 'spring', stiffness: 50, delay: 0.5 }}
-            className="text-center xl:text-left xl:w-full"
-          >
-            <span className="text-3xl">Frontend Developer</span>
-            <h1 className="mb-6 bg-clip-text text-transparent bg-gradient-to-br from-[#007c7c] to-[#00f8f8] ">
-              Sava Tasić
+    <section className="relative overflow-hidden">
+      <div className="container mx-auto py-10 xl:py-16">
+        <div className="grid items-center gap-12 xl:grid-cols-[1.15fr_0.85fr] xl:gap-16">
+          <div className="text-center xl:text-left">
+            <p className="mb-4 text-sm uppercase tracking-[0.28em] text-accent">
+              {profile.role} · {profile.location}
+            </p>
+            <h1 className="mb-5 bg-gradient-to-br from-[#f0c49a] to-accent bg-clip-text text-transparent">
+              {profile.name}
             </h1>
-            <h1 className="max-w-[500px] mb-9 text-white/80 text-5xl">
-              I bring ideas to life through code.
-            </h1>
-            {/* Button and Socials */}
-            <div className="flex flex-col xl:flex-row items-center gap-8">
-              <a href="/cv/SavaResume.pdf" download>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="uppercase flex items-center gap-2"
-                >
+            <p className="mx-auto mb-8 max-w-[540px] text-lg text-cream/70 xl:mx-0">
+              {profile.bio}
+            </p>
+
+            <div className="mb-10 flex flex-col items-center gap-4 sm:flex-row xl:justify-start">
+              <Button asChild size="lg" className="uppercase tracking-[0.16em]">
+                <a href={profile.cvPath} download="SavaResume.pdf">
                   <span>Download CV</span>
                   <FiDownload className="text-base" />
-                </Button>
-              </a>
-
-              <div className="mb-8 xl:mb-0 ">
-                <Socials
-                  containerStyles="flex gap-6"
-                  iconStyles="w-12 h-12 text-[24px] border border-accent rounded-full flex justify-center items-center text-accent text-base hover:bg-accent hover:text-primary hover:transition-all duration-300"
-                />
-              </div>
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="uppercase tracking-[0.16em]"
+              >
+                <Link href="/work">
+                  <span>View work</span>
+                  <FiArrowUpRight className="text-base" />
+                </Link>
+              </Button>
             </div>
-          </motion.div>
-          {/* Photo */}
-          <motion.div
-            initial={{ x: '100vw' }}
-            animate={{ x: 0 }}
-            transition={{ type: 'spring', stiffness: 50, delay: 0.5 }}
-            className="w-full h-full mt-8 mb-20 xl:mb-0 xl:mt-0"
-          >
+
+            <Socials
+              containerStyles="flex justify-center xl:justify-start gap-4 mb-12"
+              iconStyles="w-11 h-11 text-lg border border-accent/50 rounded-xl flex justify-center items-center text-accent hover:bg-accent hover:text-primary transition-colors duration-300"
+            />
+
+            <div className="grid grid-cols-3 gap-4 border-t border-cream/10 pt-8">
+              {stats.map((stat) => (
+                <div key={stat.label} className="text-center xl:text-left">
+                  <p className="font-display text-2xl text-accent xl:text-3xl">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 text-xs uppercase tracking-wider text-cream/50 sm:text-sm">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex w-full justify-center">
             <Photo />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -9,16 +9,14 @@ interface SingleCardProps {
   handleChoice: (card: CardProps) => void;
   flipped: boolean;
   disabled: boolean;
-  delay: number;
 }
 
-const SingleCard: React.FC<SingleCardProps> = ({
+const SingleCard = ({
   card,
   handleChoice,
   flipped,
   disabled,
-  delay,
-}) => {
+}: SingleCardProps) => {
   const handleClick = () => {
     if (!disabled) {
       handleChoice(card);
@@ -28,37 +26,31 @@ const SingleCard: React.FC<SingleCardProps> = ({
   return (
     <motion.div
       onClick={handleClick}
-      className={`relative cursor-pointer w-full h-[70px] md:h-[100px] ${
+      className={`relative h-[70px] w-full cursor-pointer md:h-[100px] ${
         card.matched ? 'text-accent transition-all duration-500 delay-300' : ''
       }`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay }}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.06 }}
     >
-      {/* Card Container */}
       <motion.div
-        className={`relative w-full h-full ${flipped ? 'flipped' : ''}`}
+        className="relative h-full w-full"
         style={{ perspective: '1000px' }}
       >
-        {/* Front */}
         <motion.div
-          className="absolute w-full h-full bg-secundary flex justify-center items-center rounded-xl"
+          className="absolute flex h-full w-full items-center justify-center rounded-xl bg-secondary"
           style={{ backfaceVisibility: 'hidden' }}
           animate={{ rotateY: flipped ? 0 : -180 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.55 }}
         >
-          <div className="text-5xl text-center">{card.icon}</div>
+          <div className="text-center text-4xl md:text-5xl">{card.icon}</div>
         </motion.div>
 
-        {/* Back */}
         <motion.div
-          className="absolute w-full h-full bg-secundary flex justify-center items-center rounded-xl"
+          className="absolute flex h-full w-full items-center justify-center rounded-xl border border-cream/10 bg-secondary"
           style={{ backfaceVisibility: 'hidden' }}
           animate={{ rotateY: flipped ? 180 : 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.55 }}
         >
-          <div className="text-5xl text-center">
+          <div className="text-center text-4xl text-accent/80">
             <IoGameController />
           </div>
         </motion.div>
