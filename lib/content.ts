@@ -5,7 +5,7 @@ export const profile = {
   email: 'sava.tasic018@gmail.com',
   phone: '(+381) 61 422 4331',
   github: 'https://github.com/SavaFPS',
-  linkedin: 'https://www.linkedin.com/in/sava-tasic-428079264/',
+  linkedin: 'https://www.linkedin.com/in/sava-tasic/',
   cvPath: '/cv/SavaResume.pdf',
   bio: 'I enjoy building useful and reliable web applications. I work across both frontend and backend, with a focus on clean code, intuitive user experiences, and solving real-world problems.',
 };
@@ -25,7 +25,7 @@ export const about = {
     { fieldName: 'Phone', fieldValue: profile.phone },
     { fieldName: 'Location', fieldValue: profile.location },
     { fieldName: 'Experience', fieldValue: '4+ years' },
-    { fieldName: 'Languages', fieldValue: 'Serbian, English' },
+    { fieldName: 'Languages', fieldValue: 'Serbian — Native, English — Intermediate' },
   ],
 };
 
@@ -39,10 +39,11 @@ export const experience = {
       position: 'Full Stack Developer',
       duration: 'Apr 2026 — Present',
       highlights: [
-        'Worked on full-stack web applications for clients across healthcare and e-commerce.',
-        'Developed a mental health platform using React and Node.js, with GraphQL and TypeORM on the backend.',
-        'Built anonymous user interactions, community posts, and online workshops.',
-        'Developed an online store for lighting products with React, Node.js and Express.',
+        'Worked on full-stack web applications for clients across healthcare and e-commerce, contributing to both frontend and backend development.',
+        'Developed a mental health platform using React and Node.js.',
+        'Built backend functionality and APIs using GraphQL and TypeORM.',
+        'Worked on anonymous user interactions, community posts, and online workshops.',
+        'Developed an online store for lighting products using React, Node.js and Express.',
       ],
     },
     {
@@ -50,10 +51,12 @@ export const experience = {
       position: 'Full Stack Developer',
       duration: 'Jan 2026 — Apr 2026',
       highlights: [
-        'Developed the complete frontend and backend for a production real estate platform.',
-        'Built a modern, responsive UI with Next.js and TypeScript.',
-        'Implemented backend services and API layer with Node.js and GraphQL.',
-        'Designed database models with TypeORM and integrated Redis for caching.',
+        'Developed the complete frontend and backend for a production real estate website.',
+        'Built modern, responsive UI with Next.js and TypeScript.',
+        'Implemented backend services and API layer using Node.js and GraphQL.',
+        'Designed and managed database models with TypeORM.',
+        'Integrated Redis for caching and performance optimization.',
+        'Delivered a fast, scalable and SEO-friendly platform used by real users.',
       ],
     },
     {
@@ -61,10 +64,11 @@ export const experience = {
       position: 'Frontend Developer',
       duration: 'Oct 2024 — Jun 2025',
       highlights: [
-        'Worked on a white-label mentorship and online course platform.',
-        'Migrated core frontend architecture from Angular to React.',
-        'Built reusable UI with React, Material UI and the Vuexy design system.',
-        'Integrated TanStack Query and React Hook Form for data fetching and forms.',
+        'Worked on Mentortools, a white-label mentorship and online course platform that enables content creators to build and manage their own learning portals.',
+        'Migrated core frontend architecture from Angular to React, improving performance and maintainability.',
+        'Built reusable UI components using React, Material UI and the Vuexy design system.',
+        'Integrated TanStack Query for optimized API data fetching and caching.',
+        'Developed dynamic and validated forms with React Hook Form, improving user experience and data integrity.',
       ],
     },
     {
@@ -72,9 +76,12 @@ export const experience = {
       position: 'Frontend Developer',
       duration: 'Oct 2021 — Oct 2024',
       highlights: [
-        'Completed company-led training in HTML, CSS, JavaScript, TypeScript, React and Framer Motion.',
-        'Built a Weather Forecast App with React, TypeScript and Material UI.',
-        'Worked on the company website and internal tools with React, TypeScript and Tailwind CSS.',
+        'Completed company-led training in HTML, CSS, JavaScript, TypeScript, React, Node.js and Framer Motion.',
+        'Developed responsive components and user interfaces.',
+        'Developed a Weather Forecast App using React, TypeScript and Material UI.',
+        'Worked on the official company website using React, TypeScript and Tailwind CSS.',
+        'Contributed to an internal project using React, TypeScript and Tailwind CSS.',
+        'Developed and debugged responsive UI components while collaborating closely with mentors.',
         'Delivered a Shopify-based e-commerce website for a local client.',
       ],
     },
@@ -148,7 +155,7 @@ export const projects: Project[] = [
     title: 'Distrikt Nekretnine',
     subject: 'Real estate platform',
     description:
-      'Production platform for managing and presenting property listings, with search, filtering and user-facing functionality. Built the complete frontend and backend — Next.js, TypeScript, GraphQL, TypeORM and Redis — into a fast, SEO-friendly product used by real users.',
+      'Full-stack real estate platform developed for managing and presenting property listings, search, filtering and user-facing functionality. Built the complete frontend and backend into a fast, scalable and SEO-friendly product used by real users.',
     stack: ['Next.js', 'TypeScript', 'Node.js', 'GraphQL', 'PostgreSQL', 'Redis'],
     path: 'https://distriktnekretnine.rs',
   },
@@ -158,7 +165,7 @@ export const projects: Project[] = [
     title: 'Mental Health Platform',
     subject: 'Healthcare product',
     description:
-      'Full-stack mental health platform built for a freelance client. Worked on anonymous user interactions, community posts and online workshops, with React on the frontend and Node.js, GraphQL and TypeORM on the backend.',
+      'Full-stack mental health platform built for a freelance client. Developed with React and Node.js, with backend APIs using GraphQL and TypeORM. Worked on anonymous user interactions, community posts, and online workshops.',
     stack: ['React', 'Node.js', 'GraphQL', 'TypeScript', 'TypeORM'],
   },
   {
@@ -167,7 +174,7 @@ export const projects: Project[] = [
     title: 'Lighting Store',
     subject: 'E-commerce platform',
     description:
-      'Online store for lighting products, built across both frontend and backend. Integrated product and e-commerce features using React, Node.js and Express.',
+      'Online store for lighting products using React, Node.js and Express. Worked across both frontend and backend functionality, and built and integrated product and e-commerce features.',
     stack: ['React', 'Node.js', 'Express'],
   },
   {
@@ -176,8 +183,15 @@ export const projects: Project[] = [
     title: 'Mentortools',
     subject: 'Learning platform',
     description:
-      'Contributed to a scalable mentorship and online course platform. Migrated the core frontend from Angular to React, integrated TanStack Query, and implemented dynamic forms with React Hook Form and Zod.',
-    stack: ['React', 'TypeScript', 'Material UI', 'TanStack Query'],
+      'Worked on Mentortools, a white-label mentorship and online course platform that enables content creators to build and manage their own learning portals. Migrated the core frontend from Angular to React, integrated TanStack Query, and developed dynamic forms with React Hook Form.',
+    stack: [
+      'React',
+      'TypeScript',
+      'Material UI',
+      'TanStack Query',
+      'React Hook Form',
+      'Zod',
+    ],
     path: 'https://mentortools.com/',
   },
   {
@@ -186,7 +200,7 @@ export const projects: Project[] = [
     title: 'Future Proof Soft',
     subject: 'Company website',
     description:
-      'Designed and developed the official website using React and Tailwind CSS. Focused on responsiveness and a clean interface across devices.',
+      'Worked on the official company website using React, TypeScript and Tailwind CSS. Developed responsive components and user interfaces across internal and client projects.',
     stack: ['React', 'TypeScript', 'Tailwind CSS'],
     path: 'https://www.futureproofsoft.com/',
   },
@@ -206,7 +220,7 @@ export const projects: Project[] = [
     title: 'Weather Forecast',
     subject: 'Internship project',
     description:
-      'Weather app built during training at Future Proof Soft. Displays current conditions and forecasts in a clean Material UI, with API integration and a structured component model.',
+      'Developed during training at Future Proof Soft using React, TypeScript and Material UI. Displays current weather conditions and forecasts in a clean, responsive UI.',
     stack: ['React', 'TypeScript', 'Material UI'],
     path: 'https://sava-weather.netlify.app/',
   },

@@ -4,13 +4,13 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { FaReact, FaNode } from 'react-icons/fa';
 import {
+  SiExpress,
   SiGraphql,
   SiNextdotjs,
   SiPostgresql,
   SiRedis,
   SiTailwindcss,
   SiTypescript,
-  SiJavascript,
 } from 'react-icons/si';
 import SingleCard from './SingleCard';
 import type { ReactElement } from 'react';
@@ -23,7 +23,7 @@ export type CardProps = {
 };
 
 const cardIcons: Omit<CardProps, 'id'>[] = [
-  { icon: <SiJavascript className="rounded-md" />, matched: false },
+  { icon: <SiExpress />, matched: false },
   { icon: <SiTypescript />, matched: false },
   { icon: <SiTailwindcss />, matched: false },
   { icon: <FaReact />, matched: false },
