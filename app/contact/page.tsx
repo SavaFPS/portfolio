@@ -1,11 +1,16 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import { useForm, type Resolver } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from 'react-icons/fa';
 import { profile } from '@/lib/content';
+import {
+  validateContact,
+  type ContactFormValues,
+} from '@/lib/contact';
 
 const info = [
   {
@@ -25,55 +30,109 @@ const info = [
   },
 ];
 
+const emptyValues: ContactFormValues = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  message: '',
+};
+
+const contactResolver: Resolver<ContactFormValues> = async (values) => {
+  const fieldErrors = validateContact(values);
+
+  if (Object.keys(fieldErrors).length === 0) {
+    return { values, errors: {} };
+  }
+
+  return {
+    values: {},
+    errors: Object.fromEntries(
+      Object.entries(fieldErrors).map(([field, message]) => [
+        field,
+        { type: 'validate', message },
+      ])
+    ),
+  };
+};
+
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
+
+  return (
+    <p id={id} role="alert" className="mt-1 text-sm text-red-400">
+      {message}
+    </p>
+  );
+}
+
 const Contact = () => {
-  const form = useRef<HTMLFormElement>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [message, setMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [submittedName, setSubmittedName] = useState('');
+  const [submitError, setSubmitError] = useState('');
 
-  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setErrorMessage('');
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormValues>({
+    resolver: contactResolver,
+    defaultValues: emptyValues,
+  });
 
-    if (!form.current) return;
+  const onSubmit = async (values: ContactFormValues) => {
+    setSubmitError('');
 
-    const data = new FormData(form.current);
-
-    setIsLoading(true);
     try {
       const response = await fetch('/api/sendEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          firstName: data.get('firstname'),
-          lastName: data.get('lastname'),
-          email: data.get('email'),
-          phone: data.get('phone'),
-          message: data.get('message'),
-        }),
+        body: JSON.stringify(values),
       });
 
+      const payload = (await response.json().catch(() => null)) as {
+        message?: string;
+        errors?: Partial<Record<keyof ContactFormValues, string>>;
+      } | null;
+
       if (response.ok) {
+        setSubmittedName(values.firstName);
         setIsSuccess(true);
-      } else {
-        setErrorMessage('Failed to send the message. Please try again later.');
+        reset(emptyValues);
+        return;
       }
+
+      if (payload?.errors) {
+        (
+          Object.entries(payload.errors) as [
+            keyof ContactFormValues,
+            string,
+          ][]
+        ).forEach(([field, message]) => {
+          setError(field, { type: 'server', message });
+        });
+      }
+
+      setSubmitError(
+        payload?.message ||
+          `Failed to send the message. You can also email me at ${profile.email}.`
+      );
     } catch {
-      setErrorMessage('Failed to send the message. Please try again later.');
-    } finally {
-      setIsLoading(false);
+      setSubmitError(
+        `Couldn't reach the server. Check your connection or email me at ${profile.email}.`
+      );
     }
   };
 
   const resetForm = () => {
     setIsSuccess(false);
-    form.current?.reset();
-    setFirstName('');
-    setMessage('');
+    setSubmittedName('');
+    setSubmitError('');
+    reset(emptyValues);
   };
 
   return (
@@ -83,8 +142,8 @@ const Contact = () => {
           {!isSuccess ? (
             <div className="order-2 xl:order-none xl:w-[58%]">
               <form
-                ref={form}
-                onSubmit={sendEmail}
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-6 rounded-2xl border border-cream/10 bg-secondary p-6 sm:p-10"
               >
                 <div>
@@ -95,55 +154,104 @@ const Contact = () => {
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <Input
-                    type="text"
-                    name="firstname"
-                    placeholder="First name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                    maxLength={25}
+                  <div>
+                    <Input
+                      type="text"
+                      placeholder="First name"
+                      autoComplete="given-name"
+                      maxLength={25}
+                      aria-invalid={Boolean(errors.firstName)}
+                      aria-describedby={
+                        errors.firstName ? 'first-name-error' : undefined
+                      }
+                      {...register('firstName')}
+                    />
+                    <FieldError
+                      id="first-name-error"
+                      message={errors.firstName?.message}
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      type="text"
+                      placeholder="Last name"
+                      autoComplete="family-name"
+                      maxLength={25}
+                      aria-invalid={Boolean(errors.lastName)}
+                      aria-describedby={
+                        errors.lastName ? 'last-name-error' : undefined
+                      }
+                      {...register('lastName')}
+                    />
+                    <FieldError
+                      id="last-name-error"
+                      message={errors.lastName?.message}
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      type="email"
+                      placeholder="Email address"
+                      autoComplete="email"
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={
+                        errors.email ? 'email-error' : undefined
+                      }
+                      {...register('email')}
+                    />
+                    <FieldError
+                      id="email-error"
+                      message={errors.email?.message}
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      type="tel"
+                      placeholder="Phone number"
+                      autoComplete="tel"
+                      aria-invalid={Boolean(errors.phone)}
+                      aria-describedby={
+                        errors.phone ? 'phone-error' : undefined
+                      }
+                      {...register('phone')}
+                    />
+                    <FieldError
+                      id="phone-error"
+                      message={errors.phone?.message}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Textarea
+                    className="h-44"
+                    placeholder="Type your message here"
+                    maxLength={500}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={
+                      errors.message ? 'message-error' : undefined
+                    }
+                    {...register('message')}
                   />
-                  <Input
-                    type="text"
-                    name="lastname"
-                    placeholder="Last name"
-                    required
-                    maxLength={25}
-                  />
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Email address"
-                    required
-                  />
-                  <Input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone number"
-                    required
+                  <FieldError
+                    id="message-error"
+                    message={errors.message?.message}
                   />
                 </div>
 
-                <Textarea
-                  name="message"
-                  className="h-44"
-                  placeholder="Type your message here"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  required
-                  maxLength={500}
-                />
-
-                {errorMessage && <p className="text-red-400">{errorMessage}</p>}
+                {submitError && (
+                  <p role="alert" className="text-sm text-red-400">
+                    {submitError}
+                  </p>
+                )}
 
                 <Button
                   type="submit"
                   className="w-full sm:w-auto"
                   size="md"
-                  disabled={isLoading}
+                  disabled={isSubmitting}
                 >
-                  {isLoading ? (
+                  {isSubmitting ? (
                     <span className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
                   ) : (
                     'Send message'
@@ -155,7 +263,7 @@ const Contact = () => {
             <div className="order-2 flex flex-col justify-between gap-6 rounded-2xl border border-cream/10 bg-secondary p-10 xl:order-none xl:w-[58%]">
               <h3 className="text-accent">Thank you for your message!</h3>
               <div className="flex flex-col gap-3 text-cream/70">
-                <p>Dear {firstName},</p>
+                <p>Dear {submittedName},</p>
                 <p>I appreciate your message and will respond as soon as I can.</p>
                 <p>
                   Best regards,
